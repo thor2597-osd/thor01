@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
  *  服务类
  * </p>
  *
- * @author LJX
+ * @author OSD
  * @since 2024-11-01
  */
 public interface UserService extends IService<UserDO> {

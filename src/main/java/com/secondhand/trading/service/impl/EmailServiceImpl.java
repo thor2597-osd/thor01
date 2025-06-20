@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 /**
- * @author ljx
+ * @author OSD
  * @time 2024/11/04 14:05
  * @description 邮件业务层实例，实现对应接口的方法
  */

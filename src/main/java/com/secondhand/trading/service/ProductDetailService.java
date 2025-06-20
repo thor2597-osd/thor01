@@ -13,7 +13,7 @@ import java.util.Map;
  * 服务类
  * </p>
  *
- * @author LJX
+ * @author OSD
  * @since 2024-11-01
  */
 public interface ProductDetailService extends IService<ProductDetailDO> {

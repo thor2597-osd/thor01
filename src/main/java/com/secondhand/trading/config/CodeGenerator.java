@@ -10,7 +10,7 @@ public class CodeGenerator {
   public static void main(String[] args) {
     FastAutoGenerator.create("jdbc:mysql://localhost:3306/second-hand?serverTime=GMT%2B8", "root", "12345678")
         .globalConfig(builder -> builder
-            .author("LJX")
+            .author("OSD")
             .outputDir(Paths.get(System.getProperty("user.dir")) + "/src/main/java")
             .commentDate("yyyy-MM-dd")
         )

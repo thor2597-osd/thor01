@@ -10,7 +10,7 @@ import com.secondhand.trading.model.Result;
  *  服务类
  * </p>
  *
- * @author LJX
+ * @author OSD
  * @since 2024-11-01
  */
 public interface ProductService extends IService<ProductDO> {

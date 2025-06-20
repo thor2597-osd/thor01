@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  *  Mapper 接口
  * </p>
  *
- * @author LJX
+ * @author OSD
  * @since 2024-11-01
  */
 @Mapper
