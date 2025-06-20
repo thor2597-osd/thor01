@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.secondhand.trading.dao.UserDAO">
+    <!-- 定义一个ResultMap来映射数据库列到UserDO实体类的属性 -->
+    <resultMap id="UserResultMap" type="com.secondhand.trading.entity.UserDO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="collection" column="collection" jdbcType="BIGINT"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="passWord" column="pass_word" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="purchaseQuantity" column="purchase_quantity" jdbcType="BIGINT"/>
+        <result property="viewCount" column="view_count" jdbcType="BIGINT"/>
+        <result property="listingCount" column="listing_count" jdbcType="BIGINT"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--    用户下架商品     -->
+    <update id="UserListingMinus">
+        update tb_user set listing_count = listing_count - 1 where id = #{id}
+    </update>
+
+    <!--    用户发布商品     -->
+    <update id="UserListingPlus">
+        update tb_user set listing_count = listing_count + 1 where id = #{id}
+    </update>
+
+    <!--    用户的收藏数量 - 1-->
+    <update id="UserCollectionMinus">
+        update tb_user set collection = collection - 1 where id = #{id}
+    </update>
+
+    <!--    用户的收藏数量 + 1-->
+    <update id="UserCollectionPlus">
+        update tb_user set collection = collection + 1 where id = #{id}
+    </update>
+
+    <!--    清空用户的浏览记录-->
+    <update id="updateUserView">
+        update tb_user set view_count = 0 where id = #{id}
+    </update>
+
+    <!--    增加用户的浏览记录-->
+    <update id="UserViewPlus">
+        update tb_user set view_count = view_count + 1 where id = #{id}
+    </update>
+
+    <!--    增加用户的订单-->
+    <update id="UserAddOrder">
+        update tb_user set purchase_quantity = purchase_quantity + 1 where id = #{id}
+    </update>
+</mapper>

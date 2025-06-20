@@ -1,0 +1,13 @@
+{
+  "userId": 1,
+  "carts": [
+    {
+      "num": 1,
+      "productDetailId": 4
+    },
+    {
+      "num": 2,
+      "productDetailId": 5
+    }
+  ]
+}

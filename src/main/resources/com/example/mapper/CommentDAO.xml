@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.secondhand.trading.dao.CommentDAO">
+    <!-- 定义一个ResultMap来映射数据库列到CommentDO实体类的属性 -->
+    <resultMap id="commentResultMap" type="com.secondhand.trading.entity.CommentDO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="refId" column="ref_id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
+        <result property="gmtCreated" column="gmt_created" jdbcType="TIMESTAMP"/>
+        <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!-->MyBatis查询支持其他模型<-->
+    <resultMap id="commentModelResultMap" type="com.secondhand.trading.model.Comment">
+        <id column="id" property="id"/>
+        <result column="ref_id" property="refId"/>
+        <result column="content" property="content"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <association property="author" javaType="com.secondhand.trading.model.CommentUser">
+            <id property="id" column="user_id"/>
+            <result column="user_name" property="userName"/>
+            <result column="nick_name" property="nickName"/>
+            <result column="avatar" property="avatar"/>
+        </association>
+    </resultMap>
+
+    <insert id="batchAdd" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_comment (ref_id,user_id,content,parent_id,gmt_created,gmt_modified)
+        VALUES
+        <foreach collection="list" item="it" index="index" separator=",">
+            (#{it.refId}, #{it.userId}, #{it.content}, #{it.parentId},now(),now())
+        </foreach>
+    </insert>
+
+    <select id="findAll" resultMap="commentResultMap">
+        select * from tb_comment
+    </select>
+
+    <select id="findByRefId" resultMap="commentModelResultMap">
+        select a.*,u.user_name,u.nick_name,u.avatar from tb_comment a left join tb_user u
+                                                                             on a.user_id=u.id where a.ref_id=#{refId} order by a.gmt_created desc
+    </select>
+
+    <select id="findByUserIds" resultMap="commentResultMap">
+        select * from tb_comment
+        <where>
+            user_id in
+            <foreach item="item" index="index" collection="userIds"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+
+</mapper>

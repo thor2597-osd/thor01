@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.secondhand.trading.dao.ProductDetailDAO">
+  <!-- 定义一个ResultMap来映射数据库列到ProductDetailDO实体类的属性 -->
+  <resultMap id="ProductDetailResultMap" type="com.secondhand.trading.entity.ProductDetailDO">
+    <id property="id" column="id" jdbcType="BIGINT"/>
+    <result property="name" column="name" jdbcType="VARCHAR"/>
+    <result property="price" column="price" jdbcType="DOUBLE"/>
+    <result property="productDetailNumber" column="product_detail_number" jdbcType="BIGINT"/>
+    <result property="productId" column="product_id" jdbcType="BIGINT"/>
+    <result property="authorId" column="author_id" jdbcType="BIGINT"/>
+    <result property="photo" column="photo" jdbcType="VARCHAR"/>
+    <result property="collection" column="collection" jdbcType="BIGINT"/>
+    <result property="description" column="description" jdbcType="VARCHAR"/>
+    <result property="commentNumber" column="comment_number" jdbcType="BIGINT"/>
+    <result property="gmtCreated" column="gmt_created" jdbcType="TIMESTAMP"/>
+    <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <!-- 通用查询结果列 -->
+  <sql id="Base_Column_List">
+    id, name, price, product_detail_number, product_id, photo, collection, description, comment_number, gmt_created, gmt_modified
+  </sql>
+
+  <select id="selectByName" resultType="com.secondhand.trading.entity.ProductDetailDO">
+    select *
+    from tb_product_detail
+    where name like CONCAT('%', #{name}, '%')
+  </select>
+
+  <!--    mybatis语句获取的默认都是对象-->
+  <select id="selectByAuthorId" resultMap="ProductDetailResultMap">
+    select *
+    from tb_product_detail
+    where author_id = #{authorId}
+  </select>
+
+  <update id="updateCommentAndCollection" parameterType="map">
+    UPDATE tb_product_detail
+    SET `collection`     = `collection` + #{collection},
+        `comment_number` = `comment_number` + #{comment}
+    WHERE `id` = #{id};
+  </update>
+
+  <update id="reduceStock">
+    update tb_product_detail
+    set product_detail_number = product_detail_number - #{num}
+    where id = #{id}
+    and product_detail_number > 0;
+  </update>
+
+  <update id="incrementNum">
+    update tb_product_detail
+    set product_detail_number = product_detail_number + #{num}
+    where id = #{id}
+  </update>
+
+  <select id="count" resultType="Long">
+    select count(*)
+    from tb_product_detail
+  </select>
+
+  <select id="pagination" resultType="com.secondhand.trading.entity.ProductDetailDO">
+    select *
+    from tb_product_detail
+    LIMIT #{pageSize} OFFSET #{offset}
+  </select>
+</mapper>

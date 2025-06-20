@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.secondhand.trading.dao.OrderItemsDAO">
+
+  <!-- 定义一个ResultMap来映射数据库列到OrderItemsDO实体类的属性 -->
+  <resultMap id="OrderItemsResultMap" type="com.secondhand.trading.entity.OrderItemsDO">
+    <id property="id" column="id" jdbcType="BIGINT"/>
+    <result property="orderId" column="order_id" jdbcType="BIGINT"/>
+    <result property="productDetailId" column="product_detail_id" jdbcType="BIGINT"/>
+    <result property="quantity" column="quantity" jdbcType="BIGINT"/>
+    <result property="totalPrice" column="total_price" jdbcType="DOUBLE"/>
+  </resultMap>
+
+</mapper>
