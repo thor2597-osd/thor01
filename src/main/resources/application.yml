@@ -44,5 +44,6 @@ spring:
 
 #这里存放你的alipay和aliyun.oss
 
+
 server:
   port: 8080

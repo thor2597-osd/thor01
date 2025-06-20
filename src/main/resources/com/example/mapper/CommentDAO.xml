@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.secondhand.trading.dao.CommentDAO">
+<mapper namespace="com.thor.dao.CommentDAO">
     <!-- 定义一个ResultMap来映射数据库列到CommentDO实体类的属性 -->
-    <resultMap id="commentResultMap" type="com.secondhand.trading.entity.CommentDO">
+    <resultMap id="commentResultMap" type="com.thor.entity.CommentDO">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="refId" column="ref_id" jdbcType="VARCHAR"/>
         <result property="userId" column="user_id" jdbcType="BIGINT"/>
@@ -12,14 +12,14 @@
         <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
     </resultMap>
     <!-->MyBatis查询支持其他模型<-->
-    <resultMap id="commentModelResultMap" type="com.secondhand.trading.model.Comment">
+    <resultMap id="commentModelResultMap" type="com.thor.model.Comment">
         <id column="id" property="id"/>
         <result column="ref_id" property="refId"/>
         <result column="content" property="content"/>
         <result column="parent_id" property="parentId"/>
         <result column="gmt_created" property="gmtCreated"/>
         <result column="gmt_modified" property="gmtModified"/>
-        <association property="author" javaType="com.secondhand.trading.model.CommentUser">
+        <association property="author" javaType="com.thor.model.CommentUser">
             <id property="id" column="user_id"/>
             <result column="user_name" property="userName"/>
             <result column="nick_name" property="nickName"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.secondhand.trading.dao.ViewDAO">
+<mapper namespace="com.thor.dao.ViewDAO">
     <!-- 定义一个ResultMap来映射数据库列到ViewDO实体类的属性 -->
-    <resultMap id="ViewResultMap" type="com.secondhand.trading.entity.ViewDO">
+    <resultMap id="ViewResultMap" type="com.thor.entity.ViewDO">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="userId" column="user_id" jdbcType="BIGINT"/>
         <result property="productDetailId" column="product_detail_id" jdbcType="BIGINT"/>
